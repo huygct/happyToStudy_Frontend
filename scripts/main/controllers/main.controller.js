@@ -2,12 +2,22 @@
 
 (function () {
   angular.module('happyToStudyApp')
-    .controller('MainController', ['$mdSidenav', function ($mdSidenav) {
+    .controller('MainController', ['$mdSidenav', 'mainService', function ($mdSidenav, mainService) {
       var self = this;
 
-      self.toggleSidenav = function(menuId) {
+      self.toggleSidenav = function (menuId) {
         $mdSidenav(menuId).toggle();
+      };
+
+      self.menuToggleOptions = {
+
+        menus: mainService.cache.menus,
+
+        externalScope: {
+
+        }
       }
+
 
     }])
 

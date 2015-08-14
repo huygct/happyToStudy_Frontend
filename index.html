@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="happyToStudyApp" ng-controller="MainController as mainCtrl">
 <head>
   <meta charset="utf-8">
   <title></title>
@@ -15,55 +15,59 @@
   <!-- endbuild -->
   <!-- build:css(.tmp) styles/main.css -->
 
+  <link rel="stylesheet" href="reusable_components/menuToggle/styples/menuToggle.css">
+
+
+  <link rel="stylesheet" href="scripts/english/effortEnglish/styles/effortEnglish.css">
 
   <link rel="stylesheet" href="scripts/common/styles/common.css">
 
   <link rel="stylesheet" href="scripts/main/styles/main.css">
   <!-- endbuild -->
 </head>
-<body ng-app="happyToStudyApp">
+<body>
 <!-- Add your site or application content here -->
-<div ng-controller="MainController as mainCtrl">
-  <md-toolbar layout="row">
-    <div class="md-toolbar-tools">
-      <md-button ng-click="mainCtrl.toggleSidenav('left')" hide-gt-sm class="md-icon-button">
-        <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
-      </md-button>
-      <h1>Happy To Study</h1>
-    </div>
-  </md-toolbar>
-  <div class="menu-side-left" layout="row" flex>
-    <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
-                md-is-locked-open="$mdMedia('gt-sm')">
-      <ul>
-        <li>
-          <md-button>
-            <div>
-              <span>Default Link</span>
-              <i class="fa fa-chevron-down" ng-class=""></i>
-              <i class="fa fa-chevron-up"></i>
-            </div>
+<div id="wrapper">
+
+  <header class="header header-fixed">
+    <section class="htl-index-menu-main">menu-Main</section>
+    <section>
+      <md-toolbar layout="row">
+        <div class="md-toolbar-tools">
+          <md-button ng-click="mainCtrl.toggleSidenav('left')" hide-gt-sm class="md-icon-button">
+            <md-icon aria-label="Menu" md-svg-icon="https://s3-us-west-2.amazonaws.com/s.cdpn.io/68133/menu.svg"></md-icon>
           </md-button>
-        </li>
-      </ul>
-
-    </md-sidenav>
-    <div layout="column" flex id="content">
-      <md-content layout="column" flex class="md-padding">
-        <div class="htl-container">
-          <div ng-view=""></div>
+          <h1>Happy To Study</h1>
         </div>
-      </md-content>
+      </md-toolbar>
+    </section>
+  </header>
+
+  <section role="main" class="container main-body">
+    <div class="menu-side-left" layout="row" flex>
+      <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
+                  md-is-locked-open="$mdMedia('gt-sm')">
+
+        <menu-toggle menu-toggle-options="mainCtrl.menuToggleOptions"></menu-toggle>
+
+      </md-sidenav>
+      <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+          <div class="htl-container">
+            <div ng-view=""></div>
+          </div>
+        </md-content>
+      </div>
     </div>
-  </div>
+  </section>
 
+  <!--<img src="images/48.jpg" alt="Mountain View" style="width:304px;height:228px;">-->
 
-
-  <div class="footer">
+  <footer class="footer">
     <div class="container">
       <p>Hello world</p>
     </div>
-  </div>
+  </footer>
 </div>
 
 <!-- bower:js -->
@@ -84,13 +88,23 @@
 <!-- build:js({.tmp,app}) scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 
+<script src="reusable_components/htl.com.reusableComponents.js"></script>
+<script src="reusable_components/menuToggle/menuToggle.directive.js"></script>
+
+
+
 <script src="scripts/main/controllers/main.controller.js"></script>
+<script src="scripts/main/services/main.service.js"></script>
 
 
-<script src="scripts/english/controllers/english.controller.js"></script>
+
+<script src="scripts/english/english/controllers/english.controller.js"></script>
+
+<script src="scripts/english/effortEnglish/controllers/effortEnglish.controller.js"></script>
+<script src="scripts/english/effortEnglish/services/effortEnglish.service.js"></script>
 
 
-<script src="scripts/entertainment/controllers/entertainment.controller.js"></script>
+<script src="scripts/entertainment/entertainment/controllers/entertainment.controller.js"></script>
 
 
 <!-- endbuild -->

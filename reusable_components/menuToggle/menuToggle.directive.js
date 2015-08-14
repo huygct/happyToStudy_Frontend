@@ -4,30 +4,53 @@
 
 (function () {
   angular.module('htl.com.reusableComponents')
-    .directive('menuToggle', menuToggle)
+    .directive('menuToggle', menuToggle);
 
-  function menuToggle () {
-    var directive = {
+  function menuToggle() {
+    return {
       restrict: 'EA',
-      templateUrl: 'reusable_components/menuToggle/templates/template.directive.html',
+      templateUrl: 'reusable_components/menuToggle/templates/menuToggle.html',
       scope: {
         menuToggleOptions: '='
       },
       link: linkFunc,
       controller: MenuToggleController,
-      controllerAs: menuToggleCtrl,
+      controllerAs: 'menuToggleCtrl',
       bindToController: true
     };
-    return directive;
 
-    function linkFunc () {
+    function linkFunc() {
 
     }
   }
 
   MenuToggleController.$inject = [];
 
-  function MenuToggleController () {
+  function MenuToggleController() {
+    var self = this;
 
+    self.setExpand = setExpand;
+    self.clickChildrenButton = clickChildrenButton;
+
+    function clickChildrenButton(child) {
+      self.selected = child.id;
+
+      if (angular.isFunction(self.menuToggleOptions.externalScope.selectedOneItem)) {
+        self.menuToggleOptions.externalScope.selectedOneItem(child);
+      }
+    }
+
+    function setExpand(menu) {
+      for (var i = 0; i < self.menuToggleOptions.menus.length; i++) {
+        if (self.menuToggleOptions.menus[i].id !== menu.id) {
+          self.menuToggleOptions.menus[i].showChildren = false;
+        }
+        else {
+          menu.showChildren = !menu.showChildren;
+          self.selected = menu.id;
+        }
+      }
+
+    }
   }
 })();
